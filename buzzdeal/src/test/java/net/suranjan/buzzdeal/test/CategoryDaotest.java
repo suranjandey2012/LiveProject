@@ -13,6 +13,8 @@ import net.suranjan.buzzdeal.model.Category;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 
 
 public class CategoryDaotest {
@@ -45,7 +47,7 @@ public class CategoryDaotest {
 				   assertTrue("Failed To Delete The Category",categoryDao.deleteCategory(category));
 			     }
 			   
-			   
+			   @Ignore
 			   @Test 
 			   public void updateCategoryTest()
 			    {
@@ -56,7 +58,13 @@ public class CategoryDaotest {
 			      assertTrue("Failed To Update Category",categoryDao.updateCategory(category));
 			  }
 			 
-			
+			   
+			   @Test 
+			   public void listCategoryTest()
+			    {
+				   List<Category> listCategories=categoryDao.getCategorylist();
+				   assertNotNull("Problems In Loading Product Category List",listCategories);
+			     }
 				
 			
 	}

@@ -14,8 +14,13 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import net.suranjan.buzzdeal.model.Category;
 import net.suranjan.buzzdeal.dao.CategoryDaoImpl;
+import net.suranjan.buzzdeal.dao.ProductDaoImpl;
+import net.suranjan.buzzdeal.dao.SupplierDaoImpl;
+import net.suranjan.buzzdeal.model.Category;
+import net.suranjan.buzzdeal.model.Product;
+import net.suranjan.buzzdeal.model.Supplier;
+import net.suranjan.buzzdeal.model.UserDetails;
 
 @Configuration
 @ComponentScan("net.suranjan.buzzdeal")
@@ -52,6 +57,9 @@ public class Dbconfig {
 		LocalSessionFactoryBuilder sessionfactory=new LocalSessionFactoryBuilder(getDataSource());
 		sessionfactory.addProperties(getHibernateProprties());
 		sessionfactory.addAnnotatedClass(Category.class);
+		sessionfactory.addAnnotatedClass(Supplier.class);
+		sessionfactory.addAnnotatedClass(Product.class);
+		sessionfactory.addAnnotatedClass(UserDetails.class);
 		SessionFactory sessionfac=sessionfactory.buildSessionFactory();
 		System.out.println("Built SessionFactory");
 		return sessionfac;
@@ -63,7 +71,20 @@ public class Dbconfig {
 	public CategoryDaoImpl getCategoryDAO(SessionFactory sessionFactory)
 	{
 		return new CategoryDaoImpl(sessionFactory);
+     }
+	
+	@Bean(name="SupplierDaoImpl")
+	public SupplierDaoImpl getSupplierDAO(SessionFactory sessionFactory)
+	{
+		return new SupplierDaoImpl(sessionFactory);
 	}
+	
+	@Bean(name="ProductDaoImpl")
+	public ProductDaoImpl getProductDAO(SessionFactory sessionFactory)
+	{
+		return new ProductDaoImpl(sessionFactory);
+	}
+	
 	
 	@Bean(name="transactionManager")
 	public HibernateTransactionManager getTransaction(SessionFactory sessionfactory)
