@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import net.suranjan.buzzdeal.model.Supplier;
 
-@Repository("SupplierDaoImpl")
+
 public class SupplierDaoImpl implements SupplierDao{
 
 	@Autowired
@@ -26,6 +26,7 @@ public class SupplierDaoImpl implements SupplierDao{
 	
 	
 	@Transactional
+	@Override
 	public boolean insertSupplier(Supplier supplier) {
 		try{
 		     sessionFactory.getCurrentSession().save(supplier);
@@ -39,6 +40,7 @@ public class SupplierDaoImpl implements SupplierDao{
 	}	
 	
 	@Transactional
+	@Override
 	public boolean deleteSupplier(Supplier supplier) {
 		try{
 		     sessionFactory.getCurrentSession().delete(supplier);
@@ -53,6 +55,7 @@ public class SupplierDaoImpl implements SupplierDao{
 	}
 
 	@Transactional
+	@Override
 	public boolean updateSupplier(Supplier supplier) {
 		
 		try{
@@ -66,7 +69,7 @@ public class SupplierDaoImpl implements SupplierDao{
 		}
 	}
 
-	
+	@Override
 	public Supplier getSupplier(int SupplierId) {
 		Session session=sessionFactory.openSession();
 		Supplier supplier=(Supplier) session.get(Supplier.class,SupplierId);
@@ -74,7 +77,7 @@ public class SupplierDaoImpl implements SupplierDao{
 		return supplier;
 	}
 
-	
+	@Override
 	public List<Supplier> getSupplierlist() {
 		Session session=sessionFactory.openSession();
 		Query q = session.createQuery("from Supplier");

@@ -21,7 +21,7 @@ public class UserDetailsDaoTest {
 		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
 		context.scan("net.suranjan.buzzdeal");
 		context.refresh();
-	    ud=(UserDetailsDao) context.getBean("UserDetailsDaoImpl");
+	    ud=(UserDetailsDao) context.getBean("UserDetailsDao");
 	}
 	
 	@Ignore
@@ -39,7 +39,7 @@ public class UserDetailsDaoTest {
 	  assertTrue("Failed To Register User",ud.RegisterUser(usd));
     }
 	
-	   
+	   @Ignore 
 	   @Test 
 	   public void updateUserTest()
 	    {
@@ -51,6 +51,14 @@ public class UserDetailsDaoTest {
 		  usd.setEnabled(true);
 		  usd.setEmailId("suranjandey2012@gmail.com");
 		  assertTrue("Failed To Update User",ud.UpdateUser(usd));
+	  }
+	   
+	   
+	   @Test 
+	   public void ApproveUserTest()
+	    {
+	      UserDetails usd= ud.getUser("1");
+	      assertTrue("Not an approved user",ud.ApproveUser(usd));
 	  }
 	
 	

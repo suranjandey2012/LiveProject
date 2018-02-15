@@ -22,12 +22,12 @@ public class SupplierDaotest {
     public static void preExcecution()
 	{
 		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
-		context.scan("net.suranjan.buzzdeal");
+		context.scan("net.suranjan");
 		context.refresh();
-	    supplierDao=(SupplierDao) context.getBean("SupplierDaoImpl");
+	    supplierDao=(SupplierDao) context.getBean("SupplierDao");
 	}
 	
-	@Ignore		 
+	@Ignore	 
     @Test
     public void insertSupplierTest()
     {

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import net.suranjan.buzzdeal.model.Category;
 import net.suranjan.buzzdeal.model.Product;
 
-@Repository("ProductDaoImpl")
+
 public class ProductDaoImpl implements ProductDao{
 
 	@Autowired
@@ -26,6 +26,7 @@ public class ProductDaoImpl implements ProductDao{
 	
 	
 	@Transactional
+	@Override
 	public boolean insertProduct(Product product) {
 		
 		try{	
@@ -40,6 +41,7 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Transactional
+	@Override
 	public boolean deleteProduct(Product product) {
 		try{	
 			sessionFactory.getCurrentSession().delete(product);
@@ -54,6 +56,7 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	@Transactional
+	@Override
 	public boolean updateProduct(Product product) {
 		try{
     	    sessionFactory.getCurrentSession().update(product);
@@ -66,7 +69,7 @@ public class ProductDaoImpl implements ProductDao{
 		}
 	}
 
-	
+	@Override
 	public Product getProduct(int ProductId) {
 		Session session=sessionFactory.openSession();
     	Product c=(Product) session.get(Product.class,ProductId);
@@ -74,7 +77,8 @@ public class ProductDaoImpl implements ProductDao{
 		return c;
 		
 	}
-
+    
+	@Override
 	public List<Product> getProductlist() {
 	
 		

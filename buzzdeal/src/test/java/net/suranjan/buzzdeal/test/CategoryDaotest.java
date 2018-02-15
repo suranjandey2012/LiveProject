@@ -26,17 +26,17 @@ public class CategoryDaotest {
 			    public static void preExcecution()
 				{
 					AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
-					context.scan("net.suranjan.buzzdeal");
+					context.scan("net.suranjan");
 					context.refresh();
-				    categoryDao=(CategoryDao) context.getBean("CategoryDaoImpl");
+				    categoryDao=(CategoryDao) context.getBean("CategoryDao");
 				}
-				@Ignore		 
+						 
 			    @Test
 			    public void insertCategoryTest()
 			    {
 				  Category category=new Category();
-				  category.setCategoryName("Camera");
-				  category.setCategoryDesc("DSLR Camera");
+				  category.setCategoryName("CarryBags");
+				  category.setCategoryDesc("Vip Carry Bags");
 				  assertTrue("Failed To Add Category",categoryDao.insertCategory(category));
 			    }
 			   @Ignore
@@ -58,7 +58,7 @@ public class CategoryDaotest {
 			      assertTrue("Failed To Update Category",categoryDao.updateCategory(category));
 			  }
 			 
-			   
+			   @Ignore
 			   @Test 
 			   public void listCategoryTest()
 			    {

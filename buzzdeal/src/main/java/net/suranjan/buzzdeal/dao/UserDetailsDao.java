@@ -7,7 +7,7 @@ public interface UserDetailsDao {
 	public boolean RegisterUser(UserDetails User);
 	public boolean UpdateUser(UserDetails User);
 	public UserDetails getUser(String username);
-	//public boolean ApproveUser(UserDetails user);
+	public boolean ApproveUser(UserDetails user);
 	
 
 }

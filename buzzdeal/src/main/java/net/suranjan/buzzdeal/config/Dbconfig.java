@@ -14,16 +14,20 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import net.suranjan.buzzdeal.dao.CategoryDao;
 import net.suranjan.buzzdeal.dao.CategoryDaoImpl;
+import net.suranjan.buzzdeal.dao.ProductDao;
 import net.suranjan.buzzdeal.dao.ProductDaoImpl;
+import net.suranjan.buzzdeal.dao.SupplierDao;
 import net.suranjan.buzzdeal.dao.SupplierDaoImpl;
+import net.suranjan.buzzdeal.dao.UserDetailsDao;
+import net.suranjan.buzzdeal.dao.UserDetailsDaoImpl;
 import net.suranjan.buzzdeal.model.Category;
 import net.suranjan.buzzdeal.model.Product;
 import net.suranjan.buzzdeal.model.Supplier;
 import net.suranjan.buzzdeal.model.UserDetails;
 
 @Configuration
-@ComponentScan("net.suranjan.buzzdeal")
 @EnableTransactionManagement
 public class Dbconfig {
 	
@@ -38,24 +42,18 @@ public class Dbconfig {
 		return datasource;
 	}
 	
-	public Properties getHibernateProprties()
-	{
-		
-		Properties p=new Properties();
-	    p.setProperty("hibernate.hbm2ddl.auto","update");
-	    p.setProperty("hibernate.show_sql","true");
-	    p.setProperty("hibernate.dialect","org.hibernate.dialect.H2Dialect");
-	    System.out.println("Hibernate Properties Set");
-	    return p;
-				
-	}
 	
-	@Autowired
+	
 	@Bean(name="sessionFactory")
 	public SessionFactory getSessionFactory()
 	{
+       Properties hibernateProp=new Properties();
+		hibernateProp.put("hibernate.hbm2ddl.auto", "update");
+		hibernateProp.put("hibernate.dialect","org.hibernate.dialect.H2Dialect");
+		
 		LocalSessionFactoryBuilder sessionfactory=new LocalSessionFactoryBuilder(getDataSource());
-		sessionfactory.addProperties(getHibernateProprties());
+		sessionfactory.addProperties(hibernateProp);
+		
 		sessionfactory.addAnnotatedClass(Category.class);
 		sessionfactory.addAnnotatedClass(Supplier.class);
 		sessionfactory.addAnnotatedClass(Product.class);
@@ -67,22 +65,28 @@ public class Dbconfig {
 	
 	
 	
-	@Bean(name="CategoryDaoImpl")
-	public CategoryDaoImpl getCategoryDAO(SessionFactory sessionFactory)
+	@Bean(name="CategoryDao")
+	public CategoryDao getCategoryDAO(SessionFactory sessionFactory)
 	{
 		return new CategoryDaoImpl(sessionFactory);
      }
 	
-	@Bean(name="SupplierDaoImpl")
-	public SupplierDaoImpl getSupplierDAO(SessionFactory sessionFactory)
+	@Bean(name="SupplierDao")
+	public SupplierDao getSupplierDAO(SessionFactory sessionFactory)
 	{
 		return new SupplierDaoImpl(sessionFactory);
 	}
 	
-	@Bean(name="ProductDaoImpl")
-	public ProductDaoImpl getProductDAO(SessionFactory sessionFactory)
+	@Bean(name="ProductDao")
+	public ProductDao getProductDAO(SessionFactory sessionFactory)
 	{
 		return new ProductDaoImpl(sessionFactory);
+	}
+	
+	@Bean(name="UserDetailsDao")
+	public UserDetailsDao getUserDetailsDAO(SessionFactory sessionFactory)
+	{
+		return new UserDetailsDaoImpl(sessionFactory);
 	}
 	
 	

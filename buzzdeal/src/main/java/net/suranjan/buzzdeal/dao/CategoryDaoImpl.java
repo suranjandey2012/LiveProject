@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import net.suranjan.buzzdeal.model.Category;
 
-@Repository("CategoryDaoImpl")
+
 public class CategoryDaoImpl implements CategoryDao {
 	
 	@Autowired
@@ -24,6 +24,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 	
 	@Transactional
+	@Override
 	public boolean insertCategory(Category category) {
 		
 	try{	
@@ -38,6 +39,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 	
 	@Transactional
+	@Override
 	public boolean deleteCategory(Category category) {
 		
 	try{	
@@ -55,6 +57,7 @@ public class CategoryDaoImpl implements CategoryDao {
    
      
     @Transactional
+    @Override
 	public boolean updateCategory(Category category) {
     	
     	try{
@@ -70,7 +73,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
     
     
-    
+    @Override
 	public Category getCategory(int CategoryId) {
     	Session session=sessionFactory.openSession();
     	Category c=(Category) session.get(Category.class,CategoryId);
@@ -79,7 +82,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
     
     
-   
+    @Override
 	public List<Category> getCategorylist() {
     	
 		Session session=sessionFactory.openSession();

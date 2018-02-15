@@ -24,7 +24,7 @@ static ProductDao Productdao;
 		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
 		context.scan("net.suranjan.buzzdeal");
 		context.refresh();
-	    Productdao=(ProductDao) context.getBean("ProductDaoImpl");
+	    Productdao=(ProductDao) context.getBean("ProductDao");
 	}
 	
 	@Ignore	 
@@ -49,21 +49,21 @@ static ProductDao Productdao;
 	   assertTrue("Failed To Delete The Supplier",Productdao.deleteProduct(product));
      }
    
-   @Ignore
+   
    @Test 
    public void updateProductTest()
     {
       Product product=Productdao.getProduct(2);
-      product.setProductName("Lenovo Laptop");
-	  product.setProductDesc("Core I5 processor with 8Gb RAM ");
+      product.setProductName("HCL");
+	  product.setProductDesc("Core I7 processor with 8Gb RAM ");
 	  product.setCategory("Laptop");
-	  product.setSupplier("Lenovo");
-	  product.setPrice(67000);
+	  product.setSupplier("HCL");
+	  product.setPrice(63000);
 	  product.setStock(15);
       assertTrue("Failed To Update Product",Productdao.updateProduct(product));
   }
  
-   
+   @Ignore
    @Test 
    public void listProductTest()
     {
